@@ -19,5 +19,3 @@ def getPress(pressElement):
 
 presses = list(map(getPress, pressElements))
 
-for press in presses:
-    print(press)
