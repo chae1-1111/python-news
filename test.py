@@ -21,3 +21,18 @@ presses = dict(sorted(presses.items()))
 
 for i in presses:
     print("{} : {}".format(i,presses[i]))
+
+
+pressKey = list(presses.keys())[0]
+pressNewsListHtml = requests.get("https://media.naver.com/press/{}?sid={}".format(pressKey,'100'))
+pressNewsListSoup = BeautifulSoup(pressNewsListHtml.content, "html.parser")
+
+aList = pressNewsListSoup.select("ul.press_edit_news_list li a.press_edit_news_link")
+
+def getLink(obj):
+    return obj.get_attribute_list("href")[0]
+
+links = list(map(getLink, aList))
+
+for link in links:
+    print(link)
